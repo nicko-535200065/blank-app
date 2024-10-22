@@ -1,4 +1,4 @@
-# 🎈 Blank app templates
+# 🎈 Blank app templatess
 
 A simple Streamlit app template for you to modify!
 
