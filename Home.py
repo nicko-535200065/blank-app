@@ -4,12 +4,11 @@ from pathlib import Path
 from st_pages import Page, add_page_title, hide_pages
 
 
-#st.set_page_config(
+st.set_page_config(
     page_title="Streamlit",
-#
 #     initial_sidebar_state="collapsed"
 #    page_icon="",
-#)
+)
 
 #from nav import add_navigation
 
