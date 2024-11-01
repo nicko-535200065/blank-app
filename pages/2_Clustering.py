@@ -5,8 +5,14 @@ from pathlib import Path
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
 
+from streamlit_app import add_navigation
+
+add_navigation()
+
+st.title("Clustering")
+
 st.set_page_config(
-#    page_title="",
+    page_title="Streamlit",
 #    page_icon="",
 )
 

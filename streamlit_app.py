@@ -1,15 +1,34 @@
 import streamlit as st
 import pandas as pd
 from pathlib import Path
+from st_pages import Page, add_page_title, hide_pages
 
 
-
-st.set_page_config(
-#    page_title="",
+#st.set_page_config(
+#    page_title="Streamlit",
+#
+#     initial_sidebar_state="collapsed"
 #    page_icon="",
-)
+#)
+
+#from nav import add_navigation
+
+#add_navigation()
+
+#st.title("Main Page")
 
 
+
+#st.markdown(
+#    """
+#<style>
+#   [data-testid="collapsedControl"] {
+#        display: none
+#    }
+#</style>
+#""",
+#    unsafe_allow_html=True,
+#)
 
 # ----------------------------------------------------------------------------- #
 # Menampilkan halaman utama aplikasi

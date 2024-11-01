@@ -3,10 +3,14 @@ import altair as alt
 import pandas as pd
 from pathlib import Path
 
+from streamlit_app import add_navigation
 
+add_navigation()
+
+st.title("Data")
 
 st.set_page_config(
-#    page_title="",
+    page_title="Streamlit",
 #    page_icon="",
 )
 

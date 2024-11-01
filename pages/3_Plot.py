@@ -6,7 +6,17 @@ from sklearn.cluster import KMeans
 import time
 import numpy as np
 
-st.set_page_config(page_title="Plotting Demo", page_icon="📈")
+from streamlit_app import add_navigation
+
+add_navigation()
+
+st.title("Plot")
+
+#st.set_page_config(page_title="Plotting Demo", page_icon="📈")
+st.set_page_config(
+    page_title="Streamlit",
+#    page_icon="",
+)
 
 st.markdown("# Plotting Demo")
 st.sidebar.header("Plotting Demo")
