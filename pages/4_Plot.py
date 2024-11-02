@@ -49,7 +49,7 @@ clustered_df, silhouette_avg = run_kmeans(df, n_clusters)
 
 # Menampilkan data dengan cluster
 #st.subheader("Data dengan Cluster")
-st.write(clustered_df[['Tanggal', 'Pendapatan', 'Cluster']])
+#st.write(clustered_df[['Tanggal', 'Pendapatan', 'Cluster']])
 
 # Menghitung total jumlah terjual per cluster untuk kolom kategori helm
 produk_kategori = ['AGV', 'NOL', 'INK', 'KYT', 'MDS', 'BMC', 'HIU', 'NHK', 'GM', 
