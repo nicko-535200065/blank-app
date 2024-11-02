@@ -41,15 +41,15 @@ df = load_data()
 
 # Menjalankan K-Means Clustering dengan jumlah cluster yang ditentukan
 st.header("Plot K-Means Clustering")
-#n_clusters = st.slider("Pilih jumlah cluster:", 2, 10, 3)
-#clustered_df, silhouette_avg = run_kmeans(df, n_clusters)
+n_clusters = st.slider("Pilih jumlah cluster:", 2, 10, 3)
+clustered_df, silhouette_avg = run_kmeans(df, n_clusters)
 
 # Menampilkan Silhouette Score
 #st.write(f"### Silhouette Score untuk {n_clusters} Cluster: {silhouette_avg:.3f}")
 
 # Menampilkan data dengan cluster
 #st.subheader("Data dengan Cluster")
-#st.write(clustered_df[['Tanggal', 'Pendapatan', 'Cluster']])
+st.write(clustered_df[['Tanggal', 'Pendapatan', 'Cluster']])
 
 # Menghitung total jumlah terjual per cluster untuk kolom kategori helm
 produk_kategori = ['AGV', 'NOL', 'INK', 'KYT', 'MDS', 'BMC', 'HIU', 'NHK', 'GM', 
