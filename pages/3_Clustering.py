@@ -5,8 +5,8 @@ from sklearn.metrics import silhouette_score
 
 # Konfigurasi halaman aplikasi Streamlit
 st.set_page_config(
-    page_title="K-Means Clustering dengan Silhouette Score",
-    page_icon=":bar_chart:"
+    page_title="Streamlit",
+#    page_icon="::"
 )
 
 # Fungsi untuk memuat data
