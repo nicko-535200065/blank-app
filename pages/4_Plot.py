@@ -1,42 +1,67 @@
 import streamlit as st
-import altair as alt
 import pandas as pd
-from pathlib import Path
 from sklearn.cluster import KMeans
-import time
-import numpy as np
+from sklearn.metrics import silhouette_score
+import matplotlib.pyplot as plt
 
-
-#st.set_page_config(page_title="Plotting Demo", page_icon="📈")
+# Konfigurasi halaman aplikasi Streamlit
 st.set_page_config(
-    page_title="Streamlit",
-#    page_icon="",
+    page_title="K-Means Clustering dengan Silhouette Score",
+    page_icon=":bar_chart:"
 )
 
-st.markdown("# Plotting Demo")
-st.sidebar.header("Plotting Demo")
-st.write(
-    """This demo illustrates a combination of plotting and animation with
-Streamlit. We're generating a bunch of random numbers in a loop for around
-5 seconds. Enjoy!"""
-)
+# Fungsi untuk memuat data
+@st.cache_data
+def load_data():
+    # Ubah path berikut ini sesuai dengan lokasi file CSV Anda
+    data_path = "Data.csv"
+    df = pd.read_csv(data_path)
+    return df
 
-progress_bar = st.sidebar.progress(0)
-status_text = st.sidebar.empty()
-last_rows = np.random.randn(1, 1)
-chart = st.line_chart(last_rows)
+# Fungsi untuk menjalankan K-Means Clustering dan menghitung Silhouette Score
+def run_kmeans(df, n_clusters=3):
+    # Memilih fitur untuk clustering (pastikan kolom ini ada dalam Data.csv Anda)
+    produk_kategori = ['AGV', 'NOL', 'INK', 'KYT', 'MDS', 'BMC', 'HIU', 'NHK', 'GM', 
+                       'ASCA', 'ZEUS', 'CAR', 'HBC', 'JPX', 'NJS', 'DYR', 'G2', 'SRM', 
+                       'SRT', 'GOG', 'Masker', 'Kaca', 'Aksesoris', 'Lainnya']
+    
+    # Menjalankan K-Means Clustering
+    kmeans = KMeans(n_clusters=n_clusters, random_state=42)
+    cluster_labels = kmeans.fit_predict(df[produk_kategori])
+    
+    # Menghitung Silhouette Score
+    score = silhouette_score(df[produk_kategori], cluster_labels)
+    
+    # Menambahkan hasil cluster ke DataFrame asli
+    df['Cluster'] = cluster_labels
+    return df, score
 
-for i in range(1, 101):
-    new_rows = last_rows[-1, :] + np.random.randn(5, 1).cumsum(axis=0)
-    status_text.text("%i%% Complete" % i)
-    chart.add_rows(new_rows)
-    progress_bar.progress(i)
-    last_rows = new_rows
-    time.sleep(0.05)
+# Memuat data
+df = load_data()
 
-progress_bar.empty()
+# Menjalankan K-Means Clustering dengan jumlah cluster yang ditentukan
+st.header("Plot K-Means Clustering")
+#n_clusters = st.slider("Pilih jumlah cluster:", 2, 10, 3)
+#clustered_df, silhouette_avg = run_kmeans(df, n_clusters)
 
-# Streamlit widgets automatically run the script from top to bottom. Since
-# this button is not connected to any other logic, it just causes a plain
-# rerun.
-st.button("Re-run")
+# Menampilkan Silhouette Score
+#st.write(f"### Silhouette Score untuk {n_clusters} Cluster: {silhouette_avg:.3f}")
+
+# Menampilkan data dengan cluster
+#st.subheader("Data dengan Cluster")
+#st.write(clustered_df[['Tanggal', 'Pendapatan', 'Cluster']])
+
+# Menghitung total jumlah terjual per cluster untuk kolom kategori helm
+produk_kategori = ['AGV', 'NOL', 'INK', 'KYT', 'MDS', 'BMC', 'HIU', 'NHK', 'GM', 
+                   'ASCA', 'ZEUS', 'CAR', 'HBC', 'JPX', 'NJS', 'DYR', 'G2', 'SRM', 
+                   'SRT', 'GOG', 'Masker', 'Kaca', 'Aksesoris', 'Lainnya']
+cluster_sums = clustered_df.groupby('Cluster')[produk_kategori].sum().sum(axis=1)
+
+# Membuat plot bar jumlah terjual per cluster
+st.subheader("Plot Jumlah Terjual per Cluster")
+plt.figure(figsize=(8, 6))
+plt.bar(cluster_sums.index, cluster_sums.values, color='skyblue')
+plt.xlabel("Cluster")
+plt.ylabel("Jumlah Terjual")
+plt.title("Jumlah Terjual per Cluster")
+st.pyplot(plt)
