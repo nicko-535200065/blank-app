@@ -72,7 +72,8 @@ if df is None:
 #    save_data(edited_df)
 
 # Memilih kolom
-helm_features = df[['AGV', 'NOL', 'INK', 'KYT', 'MDS', 'BMC', 'HIU', 'NHK', 'GM', 'ASCA', 'ZEUS', 'CAR', 'HBC', 'JPX', 'NJS', 'DYR', 'G2', 'SRM', 'SRT', 'GOG', 'Masker', 'Kaca', 'Aksesoris', 'Lainnya']]
+helm_features = df[['AGV', 'NOL', 'INK', 'KYT', 'MDS', 'BMC', 'HIU', 'NHK', 'GM', 'ASCA', 'ZEUS', 'CAR', 'HBC', 'JPX', 'NJS', 'DYR', 'G2', 'SarungMotor', 
+                    'SarungTangan', 'Googles', 'Masker', 'Kaca', 'Aksesoris', 'Lainnya']]
 
 # Membuat data helm_features2 dengan transpose
 helm_features2 = helm_features.T
