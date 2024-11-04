@@ -1,4 +1,4 @@
 streamlit
 scikit-learn
-
+st-pages
 matplotlibst-pages
