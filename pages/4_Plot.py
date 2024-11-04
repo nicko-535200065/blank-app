@@ -58,6 +58,23 @@ produk_kategori = ['AGV', 'NOL', 'INK', 'KYT', 'MDS', 'BMC', 'HIU', 'NHK', 'GM',
                        'Googles', 'Masker', 'Kaca', 'Aksesoris', 'Lainnya']
 cluster_sales = clustered_df.groupby('Cluster')[produk_kategori].sum()
 
+# Konversi kolom 'Tanggal' ke tipe datetime
+df['Tanggal'] = pd.to_datetime(df['Tanggal'])
+df['Bulan'] = df['Tanggal'].dt.to_period("M")
+
+# Menghitung total pendapatan bulanan
+monthly_revenue = df.groupby('Bulan')['Pendapatan'].sum()
+
+# Plot total pendapatan bulanan
+st.subheader("Pendapatan Bulanan")
+fig, ax = plt.subplots(figsize=(10, 6))
+monthly_revenue.plot(ax=ax, marker='o', color='blue')
+ax.set_title("Total Pendapatan Bulanan")
+ax.set_xlabel("Bulan")
+ax.set_ylabel("Pendapatan")
+plt.xticks(rotation=45)
+st.pyplot(fig)
+
 # Plot total sales per cluster per product
 fig, ax = plt.subplots(figsize=(10, 6))
 cluster_sales.plot(kind='bar', stacked=True, ax=ax, color=plt.cm.tab20.colors)
@@ -132,14 +149,14 @@ plt.xticks(rotation=45)
 st.pyplot(fig)
 
 # Plot monthly total sales per cluster
-st.subheader("Total Penjualan Setiap Bulan untuk Setiap Cluster")
-df['Tanggal'] = pd.to_datetime(df['Tanggal'])
-df['Bulan'] = df['Tanggal'].dt.to_period("M")
-monthly_sales = df.groupby(['Cluster', 'Bulan'])[produk_kategori].sum().sum(axis=1).unstack()
-fig, ax = plt.subplots(figsize=(10, 6))
-monthly_sales.plot(ax=ax, marker='o')
-ax.set_title("Total Penjualan Bulanan per Cluster")
-ax.set_xlabel("Bulan")
-ax.set_ylabel("Total Penjualan")
-st.pyplot(fig)
+#st.subheader("Total Penjualan Setiap Bulan untuk Setiap Cluster")
+#df['Tanggal'] = pd.to_datetime(df['Tanggal'])
+#df['Bulan'] = df['Tanggal'].dt.to_period("M")
+#monthly_sales = df.groupby(['Cluster', 'Bulan'])[produk_kategori].sum().sum(axis=1).unstack()
+#fig, ax = plt.subplots(figsize=(10, 6))
+#monthly_sales.plot(ax=ax, marker='o')
+#ax.set_title("Total Penjualan Bulanan per Cluster")
+#ax.set_xlabel("Bulan")
+#ax.set_ylabel("Total Penjualan")
+#st.pyplot(fig)
 
