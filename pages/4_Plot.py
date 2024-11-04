@@ -39,8 +39,8 @@ def load_data():
 # Function to run KMeans
 def run_kmeans(df, n_clusters=3):
     produk_kategori = ['AGV', 'NOL', 'INK', 'KYT', 'MDS', 'BMC', 'HIU', 'NHK', 'GM', 
-                       'ASCA', 'ZEUS', 'CAR', 'HBC', 'JPX', 'NJS', 'DYR', 'G2', 'SarungTangan', 
-                       'Googles', 'Masker', 'Kaca', 'Aksesoris', 'Lainnya']
+                       'ASCA', 'ZEUS', 'CAR', 'HBC', 'JPX', 'NJS', 'DYR', 'G2', 'SarungMotor', 
+                       'SarungTangan', 'Googles', 'Masker', 'Kaca', 'Aksesoris', 'Lainnya']
     kmeans = KMeans(n_clusters=n_clusters, random_state=42)
     cluster_labels = kmeans.fit_predict(df[produk_kategori])
     df['Cluster'] = cluster_labels
@@ -54,8 +54,8 @@ clustered_df, cluster_labels, kmeans = run_kmeans(df, n_clusters)
 # Calculate total sales per product per cluster
 st.subheader("Total Penjualan per Produk di Masing-masing Cluster")
 produk_kategori = ['AGV', 'NOL', 'INK', 'KYT', 'MDS', 'BMC', 'HIU', 'NHK', 'GM', 
-                   'ASCA', 'ZEUS', 'CAR', 'HBC', 'JPX', 'NJS', 'DYR', 'G2', 'SarungTangan', 
-                       'Googles', 'Masker', 'Kaca', 'Aksesoris', 'Lainnya']
+                   'ASCA', 'ZEUS', 'CAR', 'HBC', 'JPX', 'NJS', 'DYR', 'G2', 'SarungMotor', 
+                   'SarungTangan', 'Googles', 'Masker', 'Kaca', 'Aksesoris', 'Lainnya']
 cluster_sales = clustered_df.groupby('Cluster')[produk_kategori].sum()
 
 # Konversi kolom 'Tanggal' ke tipe datetime
