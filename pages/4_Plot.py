@@ -130,23 +130,23 @@ plt.xticks(rotation=45)
 st.pyplot(fig)
 
 # Pastikan kolom 'Tanggal' sudah dalam format datetime
-df['Tanggal'] = pd.to_datetime(df['Tanggal'])
-df['Bulan'] = df['Tanggal'].dt.to_period("M")
+#df['Tanggal'] = pd.to_datetime(df['Tanggal'])
+#df['Bulan'] = df['Tanggal'].dt.to_period("M")
 
 # Tentukan rentang bulan penuh dari data yang tersedia
-all_months = pd.period_range(df['Bulan'].min(), df['Bulan'].max(), freq='M')
+#all_months = pd.period_range(df['Bulan'].min(), df['Bulan'].max(), freq='M')
 
 # Hitung total penjualan bulanan untuk setiap cluster dan isi dengan 0 untuk bulan yang kosong
-monthly_sales = df.groupby(['Bulan', 'Cluster'])[produk_kategori].sum().sum(axis=1).unstack().reindex(all_months, fill_value=0)
+#monthly_sales = df.groupby(['Bulan', 'Cluster'])[produk_kategori].sum().sum(axis=1).unstack().reindex(all_months, fill_value=0)
 
 # Plot total penjualan bulanan per cluster
-fig, ax = plt.subplots(figsize=(10, 6))
-monthly_sales.plot(ax=ax, marker='o')
-ax.set_title("Total Penjualan Bulanan per Cluster")
-ax.set_xlabel("Bulan")
-ax.set_ylabel("Total Penjualan")
-plt.xticks(rotation=45)
-st.pyplot(fig)
+#fig, ax = plt.subplots(figsize=(10, 6))
+#monthly_sales.plot(ax=ax, marker='o')
+#ax.set_title("Total Penjualan Bulanan per Cluster")
+#ax.set_xlabel("Bulan")
+#ax.set_ylabel("Total Penjualan")
+#plt.xticks(rotation=45)
+#st.pyplot(fig)
 
 # Plot monthly total sales per cluster
 #st.subheader("Total Penjualan Setiap Bulan untuk Setiap Cluster")
