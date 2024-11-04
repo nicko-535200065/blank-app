@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score, silhouette_samples
 import numpy as np
-#from matplotlib.ticker import FuncFormatter
+from matplotlib.ticker import FuncFormatter
  
 # Konfigurasi halaman aplikasi Streamlit
 st.set_page_config(
@@ -80,7 +80,7 @@ ax.set_xlabel("Bulan")
 ax.set_ylabel("Pendapatan")
 
 # Mengatur format sumbu y agar menampilkan nilai asli tanpa disingkat
-#ax.yaxis.set_major_formatter(FuncFormatter(lambda x, _: f'{int(x):,}'))
+ax.yaxis.set_major_formatter(FuncFormatter(lambda x, _: f'{int(x):,}'))
 
 plt.xticks(rotation=45)
 st.pyplot(fig)
