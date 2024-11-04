@@ -25,10 +25,18 @@ def load_data():
     return df
 
 def save_data(df):
-    """Saves the updated inventory data back to the CSV file."""
-    CSV_FILENAME = Path(__file__).parent / "Data.csv"
-    df.to_csv(CSV_FILENAME, index=False)
-    st.success("Perubahan berhasil disimpan ke file CSV.")
+    """Saves the updated inventory data to two CSV files."""
+    # Lokasi file di luar folder 'pages' (parent directory)
+    main_csv_filename = Path(__file__).parent.parent / "Data.csv"
+    
+    # Lokasi file di dalam folder 'pages'
+    pages_csv_filename = Path(__file__).parent / "Data.csv"
+    
+    # Menyimpan ke dua lokasi file
+    df.to_csv(main_csv_filename, index=False)
+    df.to_csv(pages_csv_filename, index=False)
+    
+    st.success("Perubahan berhasil disimpan ke kedua file CSV.")
 
 # ----------------------------------------------------------------------------- #
 # Menampilkan halaman utama aplikasi
