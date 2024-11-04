@@ -23,7 +23,7 @@ def load_data():
 def run_kmeans(df, n_clusters=3):
     # Memilih fitur untuk clustering (pastikan kolom ini ada dalam Data.csv Anda)
     features = df[['AGV', 'NOL', 'INK', 'KYT', 'MDS', 'BMC', 'HIU', 'NHK', 'GM', 
-                   'ASCA', 'ZEUS', 'CAR', 'HBC', 'JPX', 'NJS', 'DYR', 'G2', , 'SarungMotor', 
+                   'ASCA', 'ZEUS', 'CAR', 'HBC', 'JPX', 'NJS', 'DYR', 'G2', 'SarungMotor', 
                    'SarungTangan', 'Googles', 'Masker', 'Kaca', 'Aksesoris', 'Lainnya']]
     
     # Menjalankan K-Means Clustering
@@ -61,7 +61,7 @@ st.write(f"### Silhouette Score rata-rata untuk {n_clusters} Cluster: {silhouett
 st.subheader("Data dengan Cluster, Jarak ke Centroid, dan Silhouette Score")
 st.write(clustered_df[['Cluster', 'Distance to Centroid', 'Silhouette Score', 'AGV', 'NOL', 'INK', 'KYT', 'MDS', 
                        'BMC', 'HIU', 'NHK', 'GM', 'ASCA', 'ZEUS', 'CAR', 'HBC', 'JPX', 
-                       'NJS', 'DYR', 'G2', , 'SarungMotor', 'SarungTangan', 
+                       'NJS', 'DYR', 'G2', 'SarungMotor', 'SarungTangan', 
                        'Googles', 'Masker', 'Kaca', 'Aksesoris', 'Lainnya']])
 
 # Menampilkan tabel per cluster
@@ -71,5 +71,5 @@ for cluster_num in range(n_clusters):
     cluster_data = clustered_df[clustered_df['Cluster'] == cluster_num]
     st.write(cluster_data[['Distance to Centroid', 'Silhouette Score', 'AGV', 'NOL', 'INK', 'KYT', 'MDS', 
                            'BMC', 'HIU', 'NHK', 'GM', 'ASCA', 'ZEUS', 'CAR', 'HBC', 'JPX', 
-                           'NJS', 'DYR', 'G2', 'SarungTangan', 
+                           'NJS', 'DYR', 'G2', 'SarungMotor', 'SarungTangan', 
                            'Googles', 'Masker', 'Kaca', 'Aksesoris', 'Lainnya']])
