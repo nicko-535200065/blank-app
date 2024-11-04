@@ -22,8 +22,8 @@ def load_data():
 def run_kmeans(df, n_clusters=3):
     # Memilih fitur untuk clustering (pastikan kolom ini ada dalam Data.csv Anda)
     produk_kategori = ['AGV', 'NOL', 'INK', 'KYT', 'MDS', 'BMC', 'HIU', 'NHK', 'GM', 
-                       'ASCA', 'ZEUS', 'CAR', 'HBC', 'JPX', 'NJS', 'DYR', 'G2', 'SRM', 
-                       'SRT', 'GOG', 'Masker', 'Kaca', 'Aksesoris', 'Lainnya']
+                       'ASCA', 'ZEUS', 'CAR', 'HBC', 'JPX', 'NJS', 'DYR', 'G2', 'SarungTangan', 
+                       'Googles', 'Masker', 'Kaca', 'Aksesoris', 'Lainnya']
     
     # Menjalankan K-Means Clustering
     kmeans = KMeans(n_clusters=n_clusters, random_state=42)
@@ -53,8 +53,8 @@ clustered_df, silhouette_avg = run_kmeans(df, n_clusters)
 
 # Menghitung total jumlah terjual per cluster untuk kolom kategori helm
 produk_kategori = ['AGV', 'NOL', 'INK', 'KYT', 'MDS', 'BMC', 'HIU', 'NHK', 'GM', 
-                   'ASCA', 'ZEUS', 'CAR', 'HBC', 'JPX', 'NJS', 'DYR', 'G2', 'SRM', 
-                   'SRT', 'GOG', 'Masker', 'Kaca', 'Aksesoris', 'Lainnya']
+                   'ASCA', 'ZEUS', 'CAR', 'HBC', 'JPX', 'NJS', 'DYR', 'G2', 'SarungTangan', 
+                       'Googles', 'Masker', 'Kaca', 'Aksesoris', 'Lainnya']
 cluster_sums = clustered_df.groupby('Cluster')[produk_kategori].sum().sum(axis=1)
 
 # Membuat plot bar jumlah terjual per cluster

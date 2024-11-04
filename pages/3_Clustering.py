@@ -49,13 +49,13 @@ st.write(f"### Silhouette Score untuk {n_clusters} Cluster: {silhouette_avg:.3f}
 # Menampilkan data dengan cluster
 st.subheader("Data dengan Cluster")
 st.write(clustered_df[['Cluster', 'AGV', 'NOL', 'INK', 'KYT', 'MDS', 'BMC', 'HIU', 'NHK', 'GM', 
-                   'ASCA', 'ZEUS', 'CAR', 'HBC', 'JPX', 'NJS', 'DYR', 'G2', 'SRM', 
-                   'SRT', 'GOG', 'Masker', 'Kaca', 'Aksesoris', 'Lainnya']])
+                   'ASCA', 'ZEUS', 'CAR', 'HBC', 'JPX', 'NJS', 'DYR', 'G2', 'SarungMotor', 
+                   'SarungTangan', 'Googles', 'Masker', 'Kaca', 'Aksesoris', 'Lainnya']])
 
 # Menampilkan tabel per cluster
 st.subheader("Hasil Clustering")
 for cluster_num in range(n_clusters):
     st.write(f"### Cluster {cluster_num}")
     st.write(clustered_df[clustered_df['Cluster'] == cluster_num][['AGV', 'NOL', 'INK', 'KYT', 'MDS', 'BMC', 'HIU', 'NHK', 'GM', 
-                   'ASCA', 'ZEUS', 'CAR', 'HBC', 'JPX', 'NJS', 'DYR', 'G2', 'SRM', 
-                   'SRT', 'GOG', 'Masker', 'Kaca', 'Aksesoris', 'Lainnya']])
+                   'ASCA', 'ZEUS', 'CAR', 'HBC', 'JPX', 'NJS', 'DYR', 'G2', 'SarungMotor', 
+                   'SarungTangan', 'Googles', 'Masker', 'Kaca', 'Aksesoris', 'Lainnya']])
