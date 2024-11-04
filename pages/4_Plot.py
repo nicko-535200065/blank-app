@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score, silhouette_samples
 import numpy as np
-
+from matplotlib.ticker import FuncFormatter
 
 
 # Fungsi untuk mengonversi tanggal dengan nama bulan dalam bahasa Indonesia
@@ -64,6 +64,7 @@ df['Bulan'] = df['Tanggal'].dt.to_period("M")
 
 # Menghitung total pendapatan bulanan
 monthly_revenue = df.groupby('Bulan')['Pendapatan'].sum()
+#monthly_revenue
 
 # Plot total pendapatan bulanan
 st.subheader("Pendapatan Bulanan")
@@ -72,6 +73,10 @@ monthly_revenue.plot(ax=ax, marker='o', color='blue')
 ax.set_title("Total Pendapatan Bulanan")
 ax.set_xlabel("Bulan")
 ax.set_ylabel("Pendapatan")
+
+# Mengatur format sumbu y agar menampilkan nilai asli tanpa disingkat
+ax.yaxis.set_major_formatter(FuncFormatter(lambda x, _: f'{int(x):,}'))
+
 plt.xticks(rotation=45)
 st.pyplot(fig)
 
