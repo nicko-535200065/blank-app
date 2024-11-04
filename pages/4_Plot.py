@@ -6,6 +6,11 @@ from sklearn.metrics import silhouette_score, silhouette_samples
 import numpy as np
 from matplotlib.ticker import FuncFormatter
  
+# Konfigurasi halaman aplikasi Streamlit
+st.set_page_config(
+    page_title="Streamlit",
+#    page_icon="",
+)
 
 # Fungsi untuk mengonversi tanggal dengan nama bulan dalam bahasa Indonesia
 def convert_indonesian_date_column(df, date_column):

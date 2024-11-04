@@ -4,9 +4,11 @@ import numpy as np
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_samples, silhouette_score
 
+
 # Konfigurasi halaman aplikasi Streamlit
 st.set_page_config(
-    page_title="K-Means Clustering with Silhouette Score",
+    page_title="Streamlit",
+#    page_icon="",
 )
 
 # Fungsi untuk memuat data

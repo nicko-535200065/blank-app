@@ -4,6 +4,7 @@ import pandas as pd
 from pathlib import Path
 
 
+# Konfigurasi halaman aplikasi Streamlit
 st.set_page_config(
     page_title="Streamlit",
 #    page_icon="",
