@@ -52,7 +52,7 @@ def run_kmeans(df, n_clusters=3):
 df = load_data()
 
 # Menjalankan K-Means Clustering
-st.header("K-Means Clustering dengan Silhouette Score")
+st.header("K-Means Clustering untuk Tanggal")
 n_clusters = st.slider("Pilih jumlah cluster:", 2, 10, 3)
 clustered_df, silhouette_avg = run_kmeans(df, n_clusters)
 
