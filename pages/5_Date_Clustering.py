@@ -61,7 +61,7 @@ st.write(f"### Silhouette Score rata-rata untuk {n_clusters} Cluster: {silhouett
 
 # Menampilkan data dengan cluster, jarak ke centroid, dan Silhouette Score per titik
 st.subheader("Data dengan Cluster, Jarak ke Centroid, dan Silhouette Score")
-st.write(clustered_df[['Cluster', 'Distance to Centroid', 'Silhouette Score', 'AGV', 'NOL', 'INK', 'KYT', 'MDS', 
+st.write(clustered_df[['Tanggal', 'Cluster', 'Distance to Centroid', 'Silhouette Score', 'AGV', 'NOL', 'INK', 'KYT', 'MDS', 
                        'BMC', 'HIU', 'NHK', 'GM', 'ASCA', 'ZEUS', 'CAR', 'HBC', 'JPX', 
                        'NJS', 'DYR', 'G2', 'SarungMotor', 'SarungTangan', 
                        'Googles', 'Masker', 'Kaca', 'Aksesoris', 'Lainnya']])
@@ -71,7 +71,7 @@ st.subheader("Hasil Clustering per Cluster")
 for cluster_num in range(n_clusters):
     st.write(f"### Cluster {cluster_num}")
     cluster_data = clustered_df[clustered_df['Cluster'] == cluster_num]
-    st.write(cluster_data[['Distance to Centroid', 'Silhouette Score', 'AGV', 'NOL', 'INK', 'KYT', 'MDS', 
+    st.write(cluster_data[['Tanggal', 'Distance to Centroid', 'Silhouette Score', 'AGV', 'NOL', 'INK', 'KYT', 'MDS', 
                            'BMC', 'HIU', 'NHK', 'GM', 'ASCA', 'ZEUS', 'CAR', 'HBC', 'JPX', 
                            'NJS', 'DYR', 'G2', 'SarungMotor', 'SarungTangan', 
                            'Googles', 'Masker', 'Kaca', 'Aksesoris', 'Lainnya']])
