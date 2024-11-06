@@ -3,3 +3,4 @@ scikit-learn
 st-pages
 matplotlib
 yellowbrick
+seaborn
