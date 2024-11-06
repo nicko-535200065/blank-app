@@ -71,7 +71,7 @@ if uploaded_file is not None:
             new_data = pd.read_excel(uploaded_file)
         
         # Menampilkan data baru yang akan diunggah
-        st.subheader("Data yang Diunggah")
+#        st.subheader("Data yang Diunggah")
         st.write(new_data)
         
         # Konfirmasi untuk mengganti data lama dengan data yang baru
