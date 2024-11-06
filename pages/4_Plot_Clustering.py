@@ -6,11 +6,12 @@ from yellowbrick.datasets import load_nfl
 import seaborn as sns
 from sklearn import preprocessing
 
-import pandas as pd
 
+import pandas as pd
+from pathlib import Path
 # Baca file Excel
 #file_path = '/content/drive/My Drive/BigData/Students/Data.xlsx'
-file_path = '/content/drive/My Drive/BigData/Students/Data_Toko_Helm.xlsx'
+file_path = Path(__file__).parent / "Data_Toko_Helm.xlsx"
 df = pd.read_excel(file_path)
 
 df.head()

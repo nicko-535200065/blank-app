@@ -9,49 +9,74 @@ st.set_page_config(
     # page_icon="",
 )
 
-# Fungsi yang mengatur penyimpanan data CSV
-def save_data(df):
-    """Saves the updated inventory data to two CSV files."""
-    # Lokasi file di luar folder 'pages' (parent directory)
-    main_csv_filename = Path(__file__).parent.parent / "Data.csv"
+# Fungsi untuk memuat data dari CSV
+def load_data():
+    """Loads the inventory data from a CSV file."""
+    CSV_FILENAME = Path(__file__).parent / "Data.csv"
     
-    # Lokasi file di dalam folder 'pages'
-    pages_csv_filename = Path(__file__).parent / "Data.csv"
+    # Membaca data dari CSV ke pandas DataFrame
+    try:
+        df = pd.read_csv(CSV_FILENAME)
+    except FileNotFoundError:
+        st.error(f"File {CSV_FILENAME} tidak ditemukan.")
+        return None
+
+    return df
+
+# Fungsi untuk menyimpan data ke CSV
+#def save_data(df):
+#    """Saves the updated inventory data to two CSV files."""
+#    main_csv_filename = Path(__file__).parent.parent / "Data.csv"
+#    pages_csv_filename = Path(__file__).parent / "Data.csv"
     
-    # Menyimpan ke dua lokasi file
-    df.to_csv(main_csv_filename, index=False)
-    df.to_csv(pages_csv_filename, index=False)
+#    df.to_csv(main_csv_filename, index=False)
+#    df.to_csv(pages_csv_filename, index=False)
     
-    st.success("Data berhasil disimpan ke kedua file CSV.")
+#    st.success("Data berhasil disimpan")
+
 
 # ----------------------------------------------------------------------------- #
 # Menampilkan halaman utama aplikasi
-
 """
 # Data Penjualan
 
-**Berikut data penjualan toko helm Kartini.**
-Unggah data penjualan melalui file CSV.
+Halaman ini menampilkan data penjualan dari toko helm Kartini.
 """
 
 st.info(
     """
-    Silakan unggah file CSV yang berisi data penjualan.
-    Setelah diunggah, Anda dapat memilih untuk menyimpannya.
+    Anda dapat mengunggah file baru untuk menggantikan data yang sekarang.
     """
 )
 
-# Komponen untuk mengunggah file
-uploaded_file = st.file_uploader("Unggah file CSV", type="csv")
+# Memuat data dari CSV asli
+df = load_data()
 
-if uploaded_file:
-    # Membaca file CSV yang diunggah ke pandas DataFrame
-    df = pd.read_csv(uploaded_file)
+if df is None:
+    st.stop()
 
-    # Menampilkan data yang diunggah
-    st.write("### Data yang diunggah:")
-    st.write(df)
+# Tampilkan data saat ini
+#st.subheader("Data Saat Ini")
+st.write(df)
 
-    # Tombol untuk menyimpan data yang diunggah
-    if st.button("Simpan data"):
-        save_data(df)
+# Komponen unggah file untuk memperbarui data
+uploaded_file = st.file_uploader("Unggah file CSV atau Excel", type=["csv", "xlsx"])
+
+if uploaded_file is not None:
+    try:
+        # Menentukan format file dan membaca sesuai formatnya
+        if uploaded_file.name.endswith('.csv'):
+            new_data = pd.read_csv(uploaded_file)
+        elif uploaded_file.name.endswith('.xlsx'):
+            new_data = pd.read_excel(uploaded_file)
+        
+        # Menampilkan data baru yang akan diunggah
+        st.subheader("Data yang Diunggah")
+        st.write(new_data)
+        
+        # Konfirmasi untuk mengganti data lama dengan data yang baru
+        if st.button("Simpan Data Baru"):
+            save_data(new_data)
+            st.success("Data baru berhasil diunggah dan disimpan.")
+    except Exception as e:
+        st.error(f"Terjadi kesalahan saat memuat data: {e}")
