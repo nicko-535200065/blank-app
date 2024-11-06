@@ -2,3 +2,4 @@ streamlit
 scikit-learn
 st-pages
 matplotlib
+yellowbrick
