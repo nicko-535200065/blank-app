@@ -3,28 +3,13 @@ import altair as alt
 import pandas as pd
 from pathlib import Path
 
-
 # Konfigurasi halaman aplikasi Streamlit
 st.set_page_config(
     page_title="Streamlit",
-#    page_icon="",
+    # page_icon="",
 )
 
-# Fungsi yang mengatur pembacaan dan penyimpanan data CSV
-
-def load_data():
-    """Loads the inventory data from a CSV file."""
-    CSV_FILENAME = Path(__file__).parent / "Data.csv"
-    
-    # Membaca data dari CSV ke pandas DataFrame
-    try:
-        df = pd.read_csv(CSV_FILENAME)
-    except FileNotFoundError:
-        st.error(f"File {CSV_FILENAME} tidak ditemukan.")
-        return None
-
-    return df
-
+# Fungsi yang mengatur penyimpanan data CSV
 def save_data(df):
     """Saves the updated inventory data to two CSV files."""
     # Lokasi file di luar folder 'pages' (parent directory)
@@ -37,43 +22,36 @@ def save_data(df):
     df.to_csv(main_csv_filename, index=False)
     df.to_csv(pages_csv_filename, index=False)
     
-    st.success("Perubahan berhasil disimpan ke kedua file CSV.")
+    st.success("Data berhasil disimpan ke kedua file CSV.")
 
 # ----------------------------------------------------------------------------- #
 # Menampilkan halaman utama aplikasi
 
 """
-#  Data Penjualan
+# Data Penjualan
 
 **Berikut data penjualan toko helm Kartini.**
-Halaman ini membaca dan menulis langsung dari/ke file dataset.
+Unggah data penjualan melalui file CSV.
 """
 
 st.info(
     """
-    Gunakan tabel di bawah ini untuk menambah, menghapus, dan mengedit item.
-    Jangan lupa untuk menyimpan perubahan setelah selesai.
+    Silakan unggah file CSV yang berisi data penjualan.
+    Setelah diunggah, Anda dapat memilih untuk menyimpannya.
     """
 )
 
-# Memuat data dari CSV
-df = load_data()
+# Komponen untuk mengunggah file
+uploaded_file = st.file_uploader("Unggah file CSV", type="csv")
 
-if df is None:
-    st.stop()
+if uploaded_file:
+    # Membaca file CSV yang diunggah ke pandas DataFrame
+    df = pd.read_csv(uploaded_file)
 
-# Tampilkan data dengan tabel yang dapat diedit
-edited_df = st.data_editor(
-    df,
-    disabled=[""],  # Jangan izinkan pengeditan kolom ''.
-    num_rows="dynamic",  # Izinkan penambahan/penghapusan baris.
-    column_config={
-        #"Pendapatan": st.column_config.NumberColumn(format="Rp.%.2f"),
-    },
-    key="inventory_table",
-)
+    # Menampilkan data yang diunggah
+    st.write("### Data yang diunggah:")
+    st.write(df)
 
-# Tombol untuk menyimpan perubahan
-if st.button("Simpan perubahan"):
-    save_data(edited_df)
-
+    # Tombol untuk menyimpan data yang diunggah
+    if st.button("Simpan data"):
+        save_data(df)
