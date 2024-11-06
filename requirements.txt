@@ -4,3 +4,4 @@ st-pages
 matplotlib
 yellowbrick
 seaborn
+openpyxl
