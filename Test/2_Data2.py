@@ -23,16 +23,16 @@ def load_data():
 
     return df
 
-#Fungsi untuk menyimpan data ke CSV
-def save_data(df):
-    """Saves the updated inventory data to two CSV files."""
-    main_csv_filename = Path(__file__).parent.parent / "Data.csv"
-    pages_csv_filename = Path(__file__).parent / "Data.csv"
+# Fungsi untuk menyimpan data ke CSV
+#def save_data(df):
+#    """Saves the updated inventory data to two CSV files."""
+#    main_csv_filename = Path(__file__).parent.parent / "Data.csv"
+#    pages_csv_filename = Path(__file__).parent / "Data.csv"
     
-    df.to_csv(main_csv_filename, index=False)
-    df.to_csv(pages_csv_filename, index=False)
+#    df.to_csv(main_csv_filename, index=False)
+#    df.to_csv(pages_csv_filename, index=False)
     
-    st.success("Data berhasil disimpan")
+#    st.success("Data berhasil disimpan")
 
 
 # ----------------------------------------------------------------------------- #
@@ -60,19 +60,18 @@ if df is None:
 st.write(df)
 
 # Komponen unggah file untuk memperbarui data
-#uploaded_file = st.file_uploader("Unggah file CSV atau Excel", type=["csv", "xlsx"])
-uploaded_file = st.file_uploader("Unggah file Excel", type=["xlsx"])
+uploaded_file = st.file_uploader("Unggah file CSV atau Excel", type=["csv", "xlsx"])
 
 if uploaded_file is not None:
     try:
         # Menentukan format file dan membaca sesuai formatnya
-        if uploaded_file.name.endswith('.xlsx'):
+        if uploaded_file.name.endswith('.csv'):
+            new_data = pd.read_csv(uploaded_file)
+        elif uploaded_file.name.endswith('.xlsx'):
             new_data = pd.read_excel(uploaded_file)
-        #elif uploaded_file.name.endswith('.csv'):
-        #    new_data = pd.read_csv(uploaded_file)
-
+        
         # Menampilkan data baru yang akan diunggah
-        #st.subheader("Data yang Diunggah")
+#        st.subheader("Data yang Diunggah")
         st.write(new_data)
         
         # Konfirmasi untuk mengganti data lama dengan data yang baru

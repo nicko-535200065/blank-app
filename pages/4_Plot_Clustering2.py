@@ -54,14 +54,15 @@ score = silhouette_score(df2_norm, kmeans.labels_)
 st.write(f"Silhouette Score rata-rata untuk 3 cluster: {score:.4f}")
 
 # Menyimpan hasil clustering ke dalam DataFrame
-df3 = df2.copy()
+#df3 = df2.copy()
+df3 = df2
 df3['Cluster'] = kmeans.labels_
 
 # Menampilkan data tiap produk di masing-masing cluster
-st.subheader("Data Produk per Cluster")
-for i in range(3):
-    st.write(f"### Cluster {i+1}")
-    st.write(df3[df3['Cluster'] == i].index.tolist())
+#st.subheader("Data Produk per Cluster")
+#for i in range(3):
+#    st.write(f"### Cluster {i+1}")
+#    st.write(df3[df3['Cluster'] == i].index.tolist())
 
 # Mengelompokkan data ke dalam DataFrame baru berdasarkan cluster
 produk_cluster0 = df3[df3['Cluster'] == 0]
@@ -69,17 +70,21 @@ produk_cluster1 = df3[df3['Cluster'] == 1]
 produk_cluster2 = df3[df3['Cluster'] == 2]
 
 # Membuat tabel total penjualan bulanan berdasarkan cluster
-df['Bulan'] = df['Bulan'].astype(str)
-df0 = df.loc[produk_cluster0.index]
-df1 = df.loc[produk_cluster1.index]
-df2 = df.loc[produk_cluster2.index]
+#df['Bulan'] = df['Bulan'].astype(str)
+idx0 = produk_cluster0.index
+idx1 = produk_cluster1.index
+idx2 = produk_cluster2.index
+
+df0 = df[idx_0]
+df1 = df[idx_1]
+df2 = df[idx_2]
 
 # Plot jumlah penjualan per bulan untuk setiap cluster
 st.subheader("Plot Jumlah Penjualan Bulanan per Cluster")
 colors = ['orange', 'blue', 'red', 'green', 'magenta', 'lime', 'gold', 'sienna', 'navy', 'purple', 'teal', 'cyan', 'tomato', 'yellowgreen', 'khaki', 'crimson', 'chocolate', 'wheat', 'silver']
 bulan_labels = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Juni', 'Juli', 'Ags', 'Sep', 'Okt', 'Nov', 'Des']
 
-for i, data in enumerate([df0, df1, df2]):
+for i, data in enumerate([idx0, idx1, idx2]):
     x = data.groupby('Bulan').sum()
     fig, ax = plt.subplots()
     x.plot.bar(color=colors, ax=ax)
