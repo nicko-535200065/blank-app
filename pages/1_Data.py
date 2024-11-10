@@ -58,7 +58,7 @@ st.write(df)
 st.info(
     """
     Unggah file baru untuk menampilkan data baru. 
-    Pastikan kolom data yang diunggah sama 
+    Pastikan kolom data yang diunggah sama.
     """
 )
 
