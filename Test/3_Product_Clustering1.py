@@ -1,4 +1,3 @@
-# pages/4_Product_Clustering.py
 
 import streamlit as st
 import pandas as pd
@@ -6,11 +5,12 @@ import numpy as np
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score, silhouette_samples
 import matplotlib.pyplot as plt
+from pathlib import Path
 
 # Fungsi untuk memuat data
 @st.cache_data
 def load_data():
-    data_path = "Data.csv"  # Sesuaikan path dengan lokasi file CSV Anda
+    data_path = Path(__file__).parent / "Data.csv"  # Sesuaikan path dengan lokasi file CSV Anda
     df = pd.read_csv(data_path)
     return df
 
