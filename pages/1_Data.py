@@ -79,7 +79,7 @@ if uploaded_file is not None:
         st.subheader("Data yang Diunggah")
     
         st.session_state["data_baru"] = df
-        st.success("Data berhasil diunggah dan disimpan sebagai 'data_baru'.")
+        st.success("Data berhasil diunggah dan disimpan sebagai data baru.")
 
         st.write("Data yang diunggah:")
         st.dataframe(df)

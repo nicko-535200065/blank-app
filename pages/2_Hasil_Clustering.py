@@ -18,8 +18,8 @@ st.set_page_config(
 
 if "data_baru" in st.session_state:
     df = st.session_state["data_baru"]
-    st.write("Data yang disimpan di 'data_baru':")
-    st.dataframe(df)
+    st.write("Menggunakan data baru:")
+    #st.dataframe(df)
 else:        
     # Baca file Excel
     #file_path = '/content/drive/My Drive/BigData/Students/Data.xlsx'
