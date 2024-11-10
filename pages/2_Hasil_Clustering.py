@@ -16,11 +16,16 @@ st.set_page_config(
 #    page_icon="",
 )
 
+if "data_baru" in st.session_state:
+    df = st.session_state["data_baru"]
+    st.write("Data yang disimpan di 'data_baru':")
+    st.dataframe(df)
+else:        
+    # Baca file Excel
+    #file_path = '/content/drive/My Drive/BigData/Students/Data.xlsx'
+    file_path = Path(__file__).parent / "Data_Toko_Helm.xlsx"
+    df = pd.read_excel(file_path)
 
-# Baca file Excel
-#file_path = '/content/drive/My Drive/BigData/Students/Data.xlsx'
-file_path = Path(__file__).parent / "Data_Toko_Helm.xlsx"
-df = pd.read_excel(file_path)
 
 """
 #  Hasil Clustering

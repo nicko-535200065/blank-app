@@ -77,8 +77,12 @@ if uploaded_file is not None:
 
         # Menampilkan data baru yang akan diunggah
         st.subheader("Data yang Diunggah")
-        st.write(df)
-        
+    
+        st.session_state["data_baru"] = df
+        st.success("Data berhasil diunggah dan disimpan sebagai 'data_baru'.")
+
+        st.write("Data yang diunggah:")
+        st.dataframe(df)
         # Konfirmasi untuk mengganti data lama dengan data yang baru
         #if st.button("Simpan Data Baru"):
         #    save_data(df)
