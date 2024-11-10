@@ -45,7 +45,7 @@ Halaman ini menampilkan data penjualan dari toko helm Kartini.
 
 st.info(
     """
-    Anda dapat mengunggah file baru untuk menggantikan data yang sekarang.
+    Anda dapat mengunggah file baru untuk menampilkan data baru.
     """
 )
 
@@ -76,8 +76,8 @@ if uploaded_file is not None:
         st.write(new_data)
         
         # Konfirmasi untuk mengganti data lama dengan data yang baru
-        if st.button("Simpan Data Baru"):
-            save_data(new_data)
-            st.success("Data baru berhasil diunggah dan disimpan.")
+        #if st.button("Simpan Data Baru"):
+        #    save_data(new_data)
+        #    st.success("Data baru berhasil diunggah dan disimpan.")
     except Exception as e:
         st.error(f"Terjadi kesalahan saat memuat data: {e}")
