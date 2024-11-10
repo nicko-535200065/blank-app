@@ -88,7 +88,7 @@ if uploaded_file is not None:
         #    save_data(df)
         #    st.success("Data baru berhasil diunggah dan disimpan.")
     except Exception as e:
-        st.error(f"Terjadi kesalahan saat memuat data: {e}")
+        st.error(f"Terjadi kesalahan saat memuat data {e}")
 
 
 st.info(
