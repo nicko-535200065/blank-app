@@ -21,8 +21,10 @@ st.set_page_config(
 #file_path = '/content/drive/My Drive/BigData/Students/Data.xlsx'
 file_path = Path(__file__).parent / "Data_Toko_Helm.xlsx"
 df = pd.read_excel(file_path)
-
 #df.head()
+
+st.header("Plot")
+n_clusters = st.slider("Pilih jumlah cluster:", 2, 10, 3)
 
 
 df2 = df.drop(['Tanggal','Bulan','Tahun', 'Pendapatan','Jumlah','Lainnya'], axis = 1)
@@ -59,40 +61,37 @@ df3['Cluster'] = kmeans.labels_
 #df3
 
 
-produk_cluster0 = df3[df3['Cluster'] == 0]
-produk_cluster1 = df3[df3['Cluster'] == 1]
-produk_cluster2 = df3[df3['Cluster'] == 2]
 
-#Mencari index setiap cluster
-idx_0 = produk_cluster0.index
-idx_1 = produk_cluster1.index
-idx_2 = produk_cluster2.index
 
-df0 = df[idx_0]
-df1 = df[idx_1]
-df2 = df[idx_2]
 
-#Data di cluster 0
-df0['Bulan'] = df['Bulan']
-#df0['Tahun'] = df['Tahun']
+# Membuat dictionary untuk menyimpan DataFrame per cluster
+produk_clusters = {}
+dfs = {}
 
-#Data di cluster 1
-df1['Bulan'] = df['Bulan']
-#df1['Tahun'] = df['Tahun']
+# Loop untuk membagi data berdasarkan cluster dan menyimpannya dalam dictionary
+for i in range(n_clusters):
+    # Memisahkan data untuk setiap cluster dari `df3`
+    produk_clusters[f'produk_cluster{i}'] = df3[df3['Cluster'] == i]
+    # Mengambil subset data dari `df` menggunakan indeks dari produk_clusters
+    dfs[f'df{i}'] = df.iloc[produk_clusters[f'produk_cluster{i}'].index]
 
-#Data di cluster 2
-df2['Bulan'] = df['Bulan']
-#df2['Tahun'] = df['Tahun']
+    # Menambahkan kolom 'Bulan' (dan 'Tahun' jika diperlukan) ke setiap DataFrame cluster
+    dfs[f'df{i}']['Bulan'] = df['Bulan'].values
+    # dfs[f'df{i}']['Tahun'] = df['Tahun'].values  # Uncomment jika ingin menambahkan kolom 'Tahun'
 
 # Plot jumlah penjualan per bulan untuk setiap cluster
 st.subheader("Plot Jumlah Penjualan Bulanan per Cluster")
-colors = ['orange', 'blue', 'red', 'green', 'magenta', 'lime', 'gold', 'sienna', 'navy', 'purple', 'teal', 'cyan', 'tomato', 'yellowgreen', 'khaki', 'crimson', 'chocolate', 'wheat', 'silver']
+colors = ['orange', 'blue', 'red', 'green', 'magenta', 'lime', 'gold', 'sienna', 'navy', 'purple', 
+          'teal', 'cyan', 'tomato', 'yellowgreen', 'khaki', 'crimson', 'chocolate', 'wheat', 'silver']
 bulan_labels = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Juni', 'Juli', 'Ags', 'Sep', 'Okt', 'Nov', 'Des']
 
-for i, data in enumerate([df0, df1, df2]):
+# Loop untuk plotting data dari setiap cluster
+for i in range(n_clusters):
+    data = dfs[f'df{i}']
     x = data.groupby('Bulan').sum()
+
     fig, ax = plt.subplots()
-    x.plot.bar(color=colors, ax=ax)
+    x.plot.bar(color=colors[:len(x)], ax=ax)  # Mengatur warna sesuai jumlah data
     ax.set_xticks(range(12))
     ax.set_xticklabels(bulan_labels, rotation=40)
     ax.set_ylabel('Jumlah')
