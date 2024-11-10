@@ -89,8 +89,8 @@ if uploaded_file is not None:
             st.write("Data yang diunggah:")
             st.dataframe(df)
         else:
-            st.error("Kolom data tidak sesuai dengan format yang diharapkan. "
-                     f"Diharapkan kolom: {expected_columns}, tetapi ditemukan kolom: {list(df.columns)}")
+            st.error("Kolom data tidak sesuai.")
+                    # f"Diharapkan kolom: {expected_columns}, tetapi ditemukan kolom: {list(df.columns)}")
 
         # Menampilkan data baru yang akan diunggah
         #st.subheader("Data yang Diunggah")
