@@ -42,18 +42,6 @@ kmeans = KMeans(n_clusters=3, random_state=42)
 kmeans.fit(df2_norm)
 
 
-#Menjalankan Plot Silhouette
-st.subheader("Silhouette Score")
-fig, ax = plt.subplots()
-visualizer = SilhouetteVisualizer(kmeans, colors='yellowbrick')
-visualizer.fit(df2_norm)
-visualizer.show()
-st.pyplot(fig)
-
-
-score = silhouette_score(df2_norm, kmeans.labels_)
-st.write(f'\nSilhouette Score: {score:.4f}')
-
 df3 = df2
 df3['Cluster'] = kmeans.labels_
 #df3
@@ -154,6 +142,20 @@ A.plot.bar(color=colors, ax=ax)
 ax.set_ylabel("Rata-rata")
 ax.set_title("Rata-rata Jumlah Penjualan per Cluster")
 st.pyplot(fig)
+
+
+#Menjalankan Plot Silhouette
+st.subheader("Silhouette Score")
+fig, ax = plt.subplots()
+visualizer = SilhouetteVisualizer(kmeans, colors='yellowbrick')
+visualizer.fit(df2_norm)
+visualizer.show()
+st.pyplot(fig)
+
+
+score = silhouette_score(df2_norm, kmeans.labels_)
+st.write(f'\nSilhouette Score: {score:.4f}')
+
 
 #Boxplot
 A = all.transpose()
