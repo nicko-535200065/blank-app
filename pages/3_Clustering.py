@@ -16,7 +16,7 @@ st.set_page_config(
 file_path = Path(__file__).parent / "Data_Toko_Helm.xlsx"
 df = pd.read_excel(file_path)
 
-st.header("K-Means Clustering")
+st.header("Clustering")
 
 # Pilih jumlah cluster
 n_clusters = 3

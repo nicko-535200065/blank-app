@@ -47,17 +47,20 @@ st.set_page_config(
 """
 #  Home
 
-**Home**
+**Halaman Utama**
 
 """
-#Pengelompokan k-means adalah metode kuantisasi vektor, 
-#yang awalnya berasal dari pemrosesan sinyal, 
-#yang bertujuan untuk membagi n pengamatan ke dalam k klaster di mana setiap pengamatan termasuk dalam klaster dengan nilai rata-rata terdekat, 
-#yang berfungsi sebagai prototipe.
-
-
 st.info(
     """
     Gunakan side bar untuk mengganti halaman.
     """
 )
+"""
+
+Pengelompokan k-means adalah metode kuantisasi vektor, 
+yang awalnya berasal dari pemrosesan sinyal, 
+yang bertujuan untuk membagi n pengamatan ke dalam k klaster di mana setiap pengamatan termasuk dalam klaster dengan nilai rata-rata terdekat, 
+yang berfungsi sebagai prototipe.
+"""
+
+
