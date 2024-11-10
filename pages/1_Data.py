@@ -57,7 +57,8 @@ st.write(df)
 
 st.info(
     """
-    Unggah file baru untuk menampilkan data baru.
+    Unggah file baru untuk menampilkan data baru. 
+    Pastikan kolom data yang diunggah sama 
     """
 )
 
@@ -75,7 +76,7 @@ if uploaded_file is not None:
         #    new_data = pd.read_csv(uploaded_file)
 
         # Menampilkan data baru yang akan diunggah
-        #st.subheader("Data yang Diunggah")
+        st.subheader("Data yang Diunggah")
         st.write(new_data)
         
         # Konfirmasi untuk mengganti data lama dengan data yang baru
@@ -94,3 +95,5 @@ Klik Lanjutkan untuk melihat hasil Clustering.
 if st.button("Lanjutkan"):
     st.switch_page("pages/2_Hasil_Clustering.py")
 
+if st.button("Kembali"):
+    st.switch_page("streamlit_app.py")
