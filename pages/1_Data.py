@@ -24,16 +24,16 @@ def load_data():
     return df
 
 #Fungsi untuk menyimpan data ke CSV
-def save_data(df):
-    """Saves the updated inventory data to two CSV files."""
+#def save_data(df):
+    #"""Saves the updated inventory data to two CSV files."""
     #main_csv_filename = Path(__file__).parent.parent / "Data.csv"
     #main_csv_filename = Path(__file__).parent. / "Data.csv"
-    pages_csv_filename = Path(__file__).parent / "Data_Toko_Helm.xlsx"
+    #pages_csv_filename = Path(__file__).parent / "Data_Toko_Helm.xlsx"
     
     #df.to_csv(main_csv_filename, index=False)
-    df.to_csv(pages_csv_filename, index=False)
+    #df.to_csv(pages_csv_filename, index=False)
     
-    st.success("Data berhasil disimpan")
+    #st.success("Data berhasil disimpan")
 
 
 # ----------------------------------------------------------------------------- #
@@ -71,18 +71,18 @@ if uploaded_file is not None:
     try:
         # Menentukan format file dan membaca sesuai formatnya
         if uploaded_file.name.endswith('.xlsx'):
-            new_data = pd.read_excel(uploaded_file)
+            df = pd.read_excel(uploaded_file)
         #elif uploaded_file.name.endswith('.csv'):
-        #    new_data = pd.read_csv(uploaded_file)
+        #    df = pd.read_csv(uploaded_file)
 
         # Menampilkan data baru yang akan diunggah
         st.subheader("Data yang Diunggah")
-        st.write(new_data)
+        st.write(df)
         
         # Konfirmasi untuk mengganti data lama dengan data yang baru
-        if st.button("Simpan Data Baru"):
-            save_data(new_data)
-            st.success("Data baru berhasil diunggah dan disimpan.")
+        #if st.button("Simpan Data Baru"):
+        #    save_data(df)
+        #    st.success("Data baru berhasil diunggah dan disimpan.")
     except Exception as e:
         st.error(f"Terjadi kesalahan saat memuat data: {e}")
 
