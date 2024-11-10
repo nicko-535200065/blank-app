@@ -39,7 +39,7 @@ def load_data():
 # ----------------------------------------------------------------------------- #
 # Menampilkan halaman utama aplikasi
 """
-# Data Penjualan
+# Data
 
 Halaman ini menampilkan data penjualan dari toko helm Kartini.
 """
