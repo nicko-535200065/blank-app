@@ -11,10 +11,10 @@ st.set_page_config(
 
 
 # Menampilkan judul dan deskripsi aplikasi
-st.title("Selamat Datang di Aplikasi Eksperimen K-Means Clustering")
+st.title("Selamat Datang di Aplikasi Clustering")
 st.write(
     """
-    Aplikasi ini melakukan uji coba *clustering* atau pengelompokan data produk penjualan menggunakan metode **K-Means Clustering**.
+    Aplikasi ini melakukan *clustering* atau pengelompokan data produk penjualan menggunakan metode **K-Means Clustering**.
     Ikuti langkah-langkah di bawah ini untuk memulai:
     """
 )
@@ -22,10 +22,10 @@ st.write(
 # Langkah-langkah penggunaan aplikasi
 st.markdown(
     """
-    1. **Mulai**: Tekan tombol **Mulai** di bawah ini untuk menuju ke halaman *Data*.
-    2. **Persiapan Data**: Di halaman *Data*, Terdapat contoh data yang bisa digunakan dan dapat mengunggah file data dalam format **Excel**.
+    1. Tekan tombol **Mulai** di bawah ini untuk menuju ke halaman *Data*.
+    2. Di halaman *Data*, Terdapat contoh data yang bisa digunakan dan dapat mengunggah file data dalam format **Excel**.
        - Pastikan data memiliki kolom yang sesuai dengan kebutuhan model.
-    3. **Lihat Hasil Cluster**: Selanjutnya akan dilakukan uji coba K-mean clustering dengan cluster berjumlah 3.
+    3. Selanjutnya akan dilakukan uji coba K-mean clustering dengan 3 cluster.
        - Terdapat beberapa grafik yang menampilkan jumlah penjualan bulanan per cluslter, jumlah total penjualan per cluster, rata-rata penjualan per cluster, silhouette score, dan boxplot.
     """
 )
