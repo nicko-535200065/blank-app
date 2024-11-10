@@ -15,15 +15,15 @@ from pathlib import Path
 file_path = Path(__file__).parent / "Data_Toko_Helm.xlsx"
 df = pd.read_excel(file_path)
 
-df.head()
+#df.head()
 
 
 df2 = df.drop(['Tanggal','Bulan','Tahun', 'Pendapatan','Jumlah','Lainnya'], axis = 1)
-df2.head()
+#df2.head()
 
 #Transpose
 df2 = df2.T
-df2
+#df2
 
 #Normalisasi
 df2_norm = preprocessing.normalize(df2)
@@ -33,20 +33,24 @@ df2_norm = pd.DataFrame(df2_norm)
 # Menjalankan K-Means Clustering
 kmeans = KMeans(n_clusters=3, random_state=42)
 kmeans.fit(df2_norm)
+df2_norm
+#Menjalankan Plot Silhouette
+st.subheader("Silhouette Score")
 fig, ax = plt.subplots()
 #visualizer = SilhouetteVisualizer(kmeans, colors='yellowbrick')
 visualizer = SilhouetteVisualizer(kmeans, colors='yellowbrick', ax=ax)
 visualizer.fit(df2_norm)
 #visualizer.show()
+
 st.pyplot(fig)
 
 
 score = silhouette_score(df2_norm, kmeans.labels_)
-print(f'\nSilhouette Score: {score:.4f}')
+st.write(f'\nSilhouette Score: {score:.4f}')
 
 df3 = df2
 df3['Cluster'] = kmeans.labels_
-df3
+#df3
 
 produk_cluster0 = df3[df3['Cluster'] == 0]
 produk_cluster1 = df3[df3['Cluster'] == 1]
@@ -111,6 +115,7 @@ for i, data in enumerate([df0, df1, df2]):
 #plt.ylabel('Jumlah')
 #plt.title('Jumlah Penjualan Bulanan di Cluster 3')
 
+#Jumlah total dan rata-rata per cluster
 all = df3.groupby('Cluster').sum()
 #all
 
@@ -121,6 +126,7 @@ plt.title('Jumlah Total Penjualan')
 
 
 # Plot jumlah total penjualan untuk semua produk per cluster
+st.subheader("Jumlah Total dan Rata-Rata Penjualan per Cluster")
 #all_sales = df3.groupby('Cluster').sum()
 #all_sales_transpose = all_sales.transpose()
 fig, ax = plt.subplots()
@@ -129,8 +135,9 @@ ax.set_ylabel("Jumlah")
 ax.set_title("Jumlah Total Penjualan per Cluster")
 st.pyplot(fig)
 
+# Plot rata-rata
 A = all.transpose().mean()
-A.plot.bar(color=colors)
+#A.plot.bar(color=colors)
 plt.ylabel('Rata-Rata')
 plt.title('Rata-Rata Jumlah Penjualan')
 
@@ -141,9 +148,18 @@ ax.set_ylabel("Rata-rata")
 ax.set_title("Rata-rata Jumlah Penjualan per Cluster")
 st.pyplot(fig)
 
+#Boxplot
 A = all.transpose()
-sns.boxplot(data = A)
+#sns.boxplot(data = A)
 plt.ylabel('Jumlah')
 plt.xlabel('Cluster')
 plt.title('Jumlah Penjualan')
 
+# Plot distribusi penjualan dengan boxplot per cluster
+st.subheader("Distribusi Penjualan per Cluster")
+fig, ax = plt.subplots()
+sns.boxplot(data=A, ax=ax)
+ax.set_ylabel("Jumlah")
+ax.set_xlabel("Cluster")
+ax.set_title("Boxplot Jumlah Penjualan per Cluster")
+st.pyplot(fig)

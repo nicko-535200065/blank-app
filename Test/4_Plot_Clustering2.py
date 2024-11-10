@@ -75,9 +75,9 @@ idx0 = produk_cluster0.index
 idx1 = produk_cluster1.index
 idx2 = produk_cluster2.index
 
-df0 = df[idx_0]
-df1 = df[idx_1]
-df2 = df[idx_2]
+#df0 = df[idx_0]
+#df1 = df[idx_1]
+#df2 = df[idx_2]
 
 # Plot jumlah penjualan per bulan untuk setiap cluster
 st.subheader("Plot Jumlah Penjualan Bulanan per Cluster")
@@ -116,5 +116,5 @@ fig, ax = plt.subplots()
 sns.boxplot(data=all_sales_transpose, ax=ax)
 ax.set_ylabel("Jumlah")
 ax.set_xlabel("Cluster")
-ax.set_title("Boxplot Jumlah Penjualan per Cluster")
+ax.set_title("Jumlah Penjualan")
 st.pyplot(fig)
