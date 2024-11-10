@@ -18,7 +18,7 @@ st.set_page_config(
 
 if "data_baru" in st.session_state:
     df = st.session_state["data_baru"]
-    st.write("Menggunakan data baru")
+    st.info("Menggunakan data baru")
     #st.dataframe(df)
 else:        
     # Baca file Excel

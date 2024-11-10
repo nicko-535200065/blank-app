@@ -65,7 +65,12 @@ st.info(
 # Komponen unggah file untuk memperbarui data
 #uploaded_file = st.file_uploader("Unggah file CSV atau Excel", type=["csv", "xlsx"])
 uploaded_file = st.file_uploader("Unggah file Excel", type=["xlsx"])
-
+expected_columns = [
+    "Tanggal", "Bulan", "Tahun", "Pendapatan", "Jumlah", 
+    "AGV", "NOL", "INK", "KYT", "MDS", "BMC", "HIU", "NHK", 
+    "GM", "ASCA", "ZEUS", "CAR", "HBC", "JPX", "NJS", "DYR", 
+    "G2", "SRM", "SRT", "GOG", "Masker", "Kaca", "Aksesoris", "Lainnya"
+]
 
 if uploaded_file is not None:
     try:
@@ -74,15 +79,27 @@ if uploaded_file is not None:
             df = pd.read_excel(uploaded_file)
         #elif uploaded_file.name.endswith('.csv'):
         #    df = pd.read_csv(uploaded_file)
+        # Cek apakah kolom data sesuai dengan kolom yang diharapkan
+        
+        
+        if list(df.columns) == expected_columns:
+            # Simpan DataFrame ke dalam st.session_state sebagai data sementara
+            st.session_state["data_baru"] = df
+            st.success("Data berhasil diunggah dan sesuai dengan format yang diharapkan.")
+            st.write("Data yang diunggah:")
+            st.dataframe(df)
+        else:
+            st.error("Kolom data tidak sesuai dengan format yang diharapkan. "
+                     f"Diharapkan kolom: {expected_columns}, tetapi ditemukan kolom: {list(df.columns)}")
 
         # Menampilkan data baru yang akan diunggah
-        st.subheader("Data yang Diunggah")
+        #st.subheader("Data yang Diunggah")
     
-        st.session_state["data_baru"] = df
-        st.success("Data berhasil diunggah dan disimpan sebagai data baru.")
+        #st.session_state["data_baru"] = df
+        #st.success("Data berhasil diunggah dan disimpan sebagai data baru.")
 
-        st.write("Data yang diunggah:")
-        st.dataframe(df)
+        #st.write("Data yang diunggah:")
+        #st.dataframe(df)
         # Konfirmasi untuk mengganti data lama dengan data yang baru
         #if st.button("Simpan Data Baru"):
         #    save_data(df)
