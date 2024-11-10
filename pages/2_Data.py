@@ -27,7 +27,8 @@ def load_data():
 def save_data(df):
     """Saves the updated inventory data to two CSV files."""
     #main_csv_filename = Path(__file__).parent.parent / "Data.csv"
-    pages_csv_filename = Path(__file__).parent / "Data.csv"
+    #main_csv_filename = Path(__file__).parent. / "Data.csv"
+    pages_csv_filename = Path(__file__).parent / "Data_Toko_Helm.xlsx"
     
     #df.to_csv(main_csv_filename, index=False)
     df.to_csv(pages_csv_filename, index=False)
@@ -76,8 +77,8 @@ if uploaded_file is not None:
         st.write(new_data)
         
         # Konfirmasi untuk mengganti data lama dengan data yang baru
-        #if st.button("Simpan Data Baru"):
-        #    save_data(new_data)
-        #    st.success("Data baru berhasil diunggah dan disimpan.")
+        if st.button("Simpan Data Baru"):
+            save_data(new_data)
+            st.success("Data baru berhasil diunggah dan disimpan.")
     except Exception as e:
         st.error(f"Terjadi kesalahan saat memuat data: {e}")
