@@ -9,53 +9,29 @@ st.set_page_config(
 #    page_icon="",
 )
 
-#page = st.sidebar.button("Pilih Halaman:", ["Home", "Data", "Plot"])
 
-# Tombol untuk beralih halaman
-#if page == "Home":
-#    st.switch_page("1_Home.py")
-#elif page == "Data":
-#    st.switch_page("2_Data.py")
-#elif page == "Plot":
-#    st.switch_page("4_Plot.py")
+# Menampilkan judul dan deskripsi aplikasi
+st.title("Selamat Datang di Aplikasi Eksperimen K-Means Clustering")
+st.write(
+    """
+    Aplikasi ini melakukan uji coba *clustering* atau pengelompokan data produk penjualan menggunakan metode **K-Means Clustering**.
+    Ikuti langkah-langkah di bawah ini untuk memulai:
+    """
+)
 
-#elif page == "Halaman 3":
-#    st.switch_page("halaman3")
+# Langkah-langkah penggunaan aplikasi
+st.markdown(
+    """
+    1. **Mulai**: Tekan tombol **Mulai** di bawah ini untuk menuju ke halaman *Data*.
+    2. **Persiapan Data**: Di halaman *Data*, Terdapat contoh data yang bisa digunakan dan dapat mengunggah file data dalam format **Excel**.
+       - Pastikan data memiliki kolom yang sesuai dengan kebutuhan model.
+    3. **Lihat Hasil Cluster**: Selanjutnya akan dilakukan uji coba K-mean clustering dengan cluster berjumlah 3.
+       - Terdapat beberapa grafik yang menampilkan jumlah penjualan bulanan per cluslter, jumlah total penjualan per cluster, rata-rata penjualan per cluster, silhouette score, dan boxplot.
+    """
+)
 
-#from nav import add_navigation
-
-#add_navigation()
-
-#st.title("Main Page")
 
 
-
-#st.markdown(
-#    """
-#<style>
-#   [data-testid="collapsedControl"] {
-#        display: none
-#    }
-#</style>
-#""",
-#    unsafe_allow_html=True,
-#)
-
-# ----------------------------------------------------------------------------- #
-# Menampilkan Home aplikasi
-
-"""
-#  Home
-
-**Halaman Utama**
-
-"""
-"""
-Pengelompokan k-means adalah metode kuantisasi vektor, 
-yang awalnya berasal dari pemrosesan sinyal, 
-yang bertujuan untuk membagi n pengamatan ke dalam k klaster di mana setiap pengamatan termasuk dalam klaster dengan nilai rata-rata terdekat, 
-yang berfungsi sebagai prototipe.
-"""
 
 st.info(
     """
