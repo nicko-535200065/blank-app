@@ -44,12 +44,6 @@ def save_data(df):
 Halaman ini menampilkan data penjualan dari toko helm Kartini.
 """
 
-st.info(
-    """
-    Anda dapat mengunggah file baru untuk menampilkan data baru.
-    """
-)
-
 # Memuat data dari CSV asli
 df = load_data()
 
@@ -60,9 +54,17 @@ if df is None:
 #st.subheader("Data Saat Ini")
 st.write(df)
 
+
+st.info(
+    """
+    Unggah file baru untuk menampilkan data baru.
+    """
+)
+
 # Komponen unggah file untuk memperbarui data
 #uploaded_file = st.file_uploader("Unggah file CSV atau Excel", type=["csv", "xlsx"])
 uploaded_file = st.file_uploader("Unggah file Excel", type=["xlsx"])
+
 
 if uploaded_file is not None:
     try:
@@ -82,3 +84,13 @@ if uploaded_file is not None:
             st.success("Data baru berhasil diunggah dan disimpan.")
     except Exception as e:
         st.error(f"Terjadi kesalahan saat memuat data: {e}")
+
+
+st.info(
+"""
+Klik Lanjutkan untuk melihat hasil Clustering.
+"""
+)
+if st.button("Lanjutkan"):
+    st.switch_page("pages/2_Hasil_Clustering.py")
+

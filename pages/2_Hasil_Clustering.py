@@ -22,15 +22,14 @@ st.set_page_config(
 file_path = Path(__file__).parent / "Data_Toko_Helm.xlsx"
 df = pd.read_excel(file_path)
 
-#df.head()
+if st.button("Kembali"):
+    st.switch_page("pages/1_Data.py")
 
 
 df2 = df.drop(['Tanggal','Bulan','Tahun', 'Pendapatan','Jumlah','Lainnya'], axis = 1)
-#df2.head()
 
 #Transpose
 df2 = df2.T
-#df2
 
 #Normalisasi
 df2_norm = preprocessing.normalize(df2)

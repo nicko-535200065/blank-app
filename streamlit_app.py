@@ -50,17 +50,20 @@ st.set_page_config(
 **Halaman Utama**
 
 """
-st.info(
-    """
-    Gunakan side bar untuk mengganti halaman.
-    """
-)
 """
-
 Pengelompokan k-means adalah metode kuantisasi vektor, 
 yang awalnya berasal dari pemrosesan sinyal, 
 yang bertujuan untuk membagi n pengamatan ke dalam k klaster di mana setiap pengamatan termasuk dalam klaster dengan nilai rata-rata terdekat, 
 yang berfungsi sebagai prototipe.
 """
+
+st.info(
+    """
+    Klik Mulai untuk menuju ke halaman data.
+    """
+)
+
+if st.button("Mulai"):
+    st.switch_page("pages/1_Data.py")
 
 
