@@ -12,11 +12,11 @@ st.set_page_config(
 # Fungsi untuk memuat data dari CSV
 def load_data():
     """Loads the inventory data from a CSV file."""
-    CSV_FILENAME = Path(__file__).parent / "Data.csv"
+    CSV_FILENAME = Path(__file__).parent / "Data_Toko_Helm.xlsx"
     
     # Membaca data dari CSV ke pandas DataFrame
     try:
-        df = pd.read_csv(CSV_FILENAME)
+        df = pd.read_excel(CSV_FILENAME)
     except FileNotFoundError:
         st.error(f"File {CSV_FILENAME} tidak ditemukan.")
         return None
@@ -26,10 +26,10 @@ def load_data():
 #Fungsi untuk menyimpan data ke CSV
 def save_data(df):
     """Saves the updated inventory data to two CSV files."""
-    main_csv_filename = Path(__file__).parent.parent / "Data.csv"
+    #main_csv_filename = Path(__file__).parent.parent / "Data.csv"
     pages_csv_filename = Path(__file__).parent / "Data.csv"
     
-    df.to_csv(main_csv_filename, index=False)
+    #df.to_csv(main_csv_filename, index=False)
     df.to_csv(pages_csv_filename, index=False)
     
     st.success("Data berhasil disimpan")

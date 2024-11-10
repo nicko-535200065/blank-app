@@ -9,6 +9,19 @@ st.set_page_config(
 #    page_icon="",
 )
 
+#page = st.sidebar.button("Pilih Halaman:", ["Home", "Data", "Plot"])
+
+# Tombol untuk beralih halaman
+#if page == "Home":
+#    st.switch_page("1_Home.py")
+#elif page == "Data":
+#    st.switch_page("2_Data.py")
+#elif page == "Plot":
+#    st.switch_page("4_Plot.py")
+
+#elif page == "Halaman 3":
+#    st.switch_page("halaman3")
+
 #from nav import add_navigation
 
 #add_navigation()
@@ -29,12 +42,12 @@ st.set_page_config(
 #)
 
 # ----------------------------------------------------------------------------- #
-# Menampilkan halaman utama aplikasi
+# Menampilkan Home aplikasi
 
 """
 #  Home
 
-**Halaman Utama**
+**Home**
 
 """
 #Pengelompokan k-means adalah metode kuantisasi vektor, 
