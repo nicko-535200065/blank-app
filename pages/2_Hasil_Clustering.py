@@ -79,6 +79,41 @@ df1['Bulan'] = df['Bulan']
 df2['Bulan'] = df['Bulan']
 #df2['Tahun'] = df['Tahun']
 
+
+#Jumlah total dan rata-rata per cluster
+all = df3.groupby('Cluster').sum()
+#all
+
+A = all.transpose().sum()
+#A.plot.bar(color=colors)
+plt.ylabel('Jumlah')
+plt.title('Jumlah Total Penjualan')
+
+
+# Plot jumlah total penjualan untuk semua produk per cluster
+st.subheader("Jumlah Total dan Rata-Rata Penjualan per Cluster")
+#all_sales = df3.groupby('Cluster').sum()
+#all_sales_transpose = all_sales.transpose()
+fig, ax = plt.subplots()
+A.plot.bar(color=colors, ax=ax)
+ax.set_ylabel("Jumlah")
+ax.set_title("Jumlah Total Penjualan per Cluster")
+st.pyplot(fig)
+
+# Plot rata-rata
+A = all.transpose().mean()
+#A.plot.bar(color=colors)
+plt.ylabel('Rata-Rata')
+plt.title('Rata-Rata Jumlah Penjualan')
+
+# Plot rata-rata penjualan untuk setiap cluster
+fig, ax = plt.subplots()
+A.plot.bar(color=colors, ax=ax)
+ax.set_ylabel("Rata-rata")
+ax.set_title("Rata-rata Jumlah Penjualan per Cluster")
+st.pyplot(fig)
+
+
 # Plot jumlah penjualan per bulan untuk setiap cluster
 st.subheader("Plot Jumlah Penjualan Bulanan per Cluster")
 colors = ['orange', 'blue', 'red', 'green', 'magenta', 'lime', 'gold', 'sienna', 'navy', 'purple', 'teal', 'cyan', 'tomato', 'yellowgreen', 'khaki', 'crimson', 'chocolate', 'wheat', 'silver']
@@ -116,39 +151,6 @@ for i, data in enumerate([df0, df1, df2]):
 #       rotation=40)
 #plt.ylabel('Jumlah')
 #plt.title('Jumlah Penjualan Bulanan di Cluster 3')
-
-#Jumlah total dan rata-rata per cluster
-all = df3.groupby('Cluster').sum()
-#all
-
-A = all.transpose().sum()
-#A.plot.bar(color=colors)
-plt.ylabel('Jumlah')
-plt.title('Jumlah Total Penjualan')
-
-
-# Plot jumlah total penjualan untuk semua produk per cluster
-st.subheader("Jumlah Total dan Rata-Rata Penjualan per Cluster")
-#all_sales = df3.groupby('Cluster').sum()
-#all_sales_transpose = all_sales.transpose()
-fig, ax = plt.subplots()
-A.plot.bar(color=colors, ax=ax)
-ax.set_ylabel("Jumlah")
-ax.set_title("Jumlah Total Penjualan per Cluster")
-st.pyplot(fig)
-
-# Plot rata-rata
-A = all.transpose().mean()
-#A.plot.bar(color=colors)
-plt.ylabel('Rata-Rata')
-plt.title('Rata-Rata Jumlah Penjualan')
-
-# Plot rata-rata penjualan untuk setiap cluster
-fig, ax = plt.subplots()
-A.plot.bar(color=colors, ax=ax)
-ax.set_ylabel("Rata-rata")
-ax.set_title("Rata-rata Jumlah Penjualan per Cluster")
-st.pyplot(fig)
 
 
 #Menjalankan Plot Silhouette
