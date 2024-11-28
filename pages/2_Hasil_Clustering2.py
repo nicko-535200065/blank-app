@@ -3,120 +3,121 @@ from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
 import matplotlib.pyplot as plt
 from yellowbrick.cluster import SilhouetteVisualizer
-import seaborn as sns
 from sklearn import preprocessing
 import pandas as pd
 from pathlib import Path
+import seaborn as sns
 
 st.set_page_config(
-    page_title="Analisis Penjualan Toko Helm",
+    page_title="Analisis Clustering Penjualan",
+    layout="wide",
 )
 
-# Load Data
+# Membaca data
 if "data_baru" in st.session_state:
     df = st.session_state["data_baru"]
-    st.info("Menggunakan data baru")
-else:        
+    st.info("Menggunakan data baru.")
+else:
     file_path = Path(__file__).parent / "Data_Toko_Helm.xlsx"
     df = pd.read_excel(file_path)
 
 """
-# Analisis Penjualan Toko Helm
-Analisis clustering pada pola penjualan produk toko helm berdasarkan data penjualan.
+# Hasil Analisis Clustering Penjualan
 """
 
-# Kembali ke halaman utama
 if st.button("Kembali"):
     st.switch_page("pages/1_Data.py")
 
-# Preprocessing Data
-df2 = df.drop(['Tanggal', 'Bulan', 'Tahun', 'Pendapatan', 'Jumlah', 'Lainnya'], axis=1).T
+# Memproses data
+df2 = df.drop(['Tanggal', 'Bulan', 'Tahun', 'Pendapatan', 'Jumlah', 'Lainnya'], axis=1)
+df2 = df2.T
 df2_norm = preprocessing.normalize(df2)
 df2_norm = pd.DataFrame(df2_norm)
 
-# K-Means Clustering
+# Menjalankan K-Means Clustering
 kmeans = KMeans(n_clusters=3, random_state=42)
 kmeans.fit(df2_norm)
 
-df3 = df2
+# Menambahkan label cluster ke data
+df3 = df2.copy()
 df3['Cluster'] = kmeans.labels_
 
-# Menampilkan hasil visualisasi
 produk_clusters = [df3[df3['Cluster'] == i] for i in range(3)]
+df_by_cluster = [df.iloc[produk.index] for produk in produk_clusters]
+
+# Plot Jumlah Penjualan Bulanan per Cluster
+st.subheader("Visualisasi Pola Penjualan Bulanan per Cluster")
+st.write("""
+Visualisasi ini menunjukkan jumlah penjualan setiap bulan untuk masing-masing cluster. 
+Dari grafik, kita dapat membaca pola penjualan dominan pada bulan tertentu dan membandingkan tren antar cluster. 
+Kegunaannya adalah untuk mengetahui bulan dengan penjualan terbaik di setiap cluster.
+""")
 bulan_labels = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Juni', 'Juli', 'Ags', 'Sep', 'Okt', 'Nov', 'Des']
 colors = ['orange', 'blue', 'red']
 
-### Visualisasi Pola Penjualan Bulanan
-st.subheader("Pola Penjualan Bulanan per Cluster")
-st.markdown("""
-**Interpretasi**:  
-Grafik berikut menunjukkan distribusi penjualan produk di setiap cluster berdasarkan bulan.  
-- Perhatikan pola naik-turunnya penjualan tiap bulan untuk masing-masing cluster.  
-- Kegunaannya: membantu memahami musim penjualan atau bulan dengan permintaan tinggi pada masing-masing cluster.
-""")
-for i, cluster_data in enumerate(produk_clusters):
-    x = df.iloc[cluster_data.index].groupby('Bulan').sum()
+for i, data in enumerate(df_by_cluster):
+    x = data.groupby('Bulan').sum()
     fig, ax = plt.subplots()
-    x.plot.bar(color=colors[i], ax=ax)
+    x.plot.bar(color=colors, ax=ax)
     ax.set_xticks(range(12))
     ax.set_xticklabels(bulan_labels, rotation=40)
-    ax.set_ylabel('Jumlah Penjualan')
-    ax.set_title(f'Cluster {i+1}')
+    ax.set_ylabel('Jumlah')
+    ax.set_title(f'Jumlah Penjualan Bulanan di Cluster {i+1}')
     st.pyplot(fig)
 
-### Total dan Rata-Rata Penjualan per Cluster
-st.subheader("Jumlah Total dan Rata-Rata Penjualan")
+# Total dan rata-rata penjualan
 all_sales = df3.groupby('Cluster').sum().transpose()
+total_sales = all_sales.sum()
+average_sales = all_sales.mean()
 
-# Total Penjualan
-st.markdown("""
-**Interpretasi**:  
-Grafik berikut menunjukkan jumlah total penjualan untuk masing-masing cluster:  
-- Cluster dengan total penjualan tertinggi menunjukkan kategori produk yang mendominasi.  
+st.subheader("Jumlah Total Penjualan per Cluster")
+st.write("""
+Grafik ini menunjukkan total penjualan dari setiap cluster. 
+Cluster dengan nilai tertinggi memiliki kontribusi penjualan terbesar. 
+Kegunaannya adalah untuk mengetahui cluster mana yang mendominasi penjualan.
 """)
 fig, ax = plt.subplots()
-all_sales.sum().plot.bar(color=colors, ax=ax)
-ax.set_ylabel("Jumlah Penjualan")
-ax.set_title("Total Penjualan per Cluster")
+total_sales.plot.bar(color=colors, ax=ax)
+ax.set_ylabel("Jumlah Total")
+ax.set_title("Jumlah Total Penjualan per Cluster")
 st.pyplot(fig)
 
-# Rata-Rata Penjualan
-st.markdown("""
-**Interpretasi**:  
-Grafik berikut menunjukkan rata-rata jumlah penjualan di setiap cluster:  
-- Berguna untuk membandingkan performa rata-rata tiap cluster.  
+st.subheader("Rata-rata Penjualan per Cluster")
+st.write("""
+Grafik ini menunjukkan rata-rata penjualan untuk setiap cluster. 
+Rata-rata membantu memahami performa cluster dibandingkan cluster lain secara konsisten.
 """)
 fig, ax = plt.subplots()
-all_sales.mean().plot.bar(color=colors, ax=ax)
-ax.set_ylabel("Rata-rata Penjualan")
+average_sales.plot.bar(color=colors, ax=ax)
+ax.set_ylabel("Rata-rata")
 ax.set_title("Rata-rata Penjualan per Cluster")
 st.pyplot(fig)
 
-### Skor Silhouette
-st.subheader("Silhouette Score dan Visualisasi")
-st.markdown("""
-**Interpretasi**:  
-Silhouette Score digunakan untuk mengevaluasi seberapa baik setiap data cocok dengan cluster-nya masing-masing.  
-- Nilai lebih mendekati 1 menunjukkan cluster yang lebih baik.  
+# Silhouette Score dan Visualisasi
+st.subheader("Silhouette Score")
+st.write("""
+Visualisasi ini menunjukkan seberapa baik data di setiap cluster dikelompokkan. 
+Nilai mendekati 1 berarti cluster terdefinisi dengan baik. 
+Silhouette Score memberikan informasi tentang efektivitas clustering.
 """)
 fig, ax = plt.subplots()
 visualizer = SilhouetteVisualizer(kmeans, colors='yellowbrick', ax=ax)
 visualizer.fit(df2_norm)
 st.pyplot(fig)
 
-silhouette_avg = silhouette_score(df2_norm, kmeans.labels_)
-st.markdown(f"**Silhouette Score: {silhouette_avg:.4f}**")
+score = silhouette_score(df2_norm, kmeans.labels_)
+st.write(f"Silhouette Score: {score:.4f}")
 
-### Distribusi Penjualan (Boxplot)
+# Distribusi Penjualan (Boxplot)
 st.subheader("Distribusi Penjualan per Cluster")
-st.markdown("""
-**Interpretasi**:  
-Boxplot menunjukkan sebaran data penjualan di setiap cluster:  
-- Identifikasi outlier dan distribusi nilai penjualan per cluster.  
+st.write("""
+Boxplot menunjukkan distribusi penjualan di setiap cluster. 
+Dari sini, dapat dilihat outlier atau penyimpangan data yang signifikan. 
+Kegunaannya adalah untuk memahami variabilitas penjualan dalam cluster.
 """)
 fig, ax = plt.subplots()
 sns.boxplot(data=all_sales, ax=ax)
-ax.set_ylabel("Jumlah Penjualan")
+ax.set_ylabel("Jumlah")
 ax.set_xlabel("Cluster")
-ax.set_title("Boxplot Penjualan per Cluster")
+ax.set_title("Boxplot Jumlah Penjualan per Cluster")
 st.pyplot(fig)
