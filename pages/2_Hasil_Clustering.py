@@ -81,6 +81,9 @@ df2['Bulan'] = df['Bulan']
 
 # Plot jumlah penjualan per bulan untuk setiap cluster
 st.subheader("Plot Jumlah Penjualan Bulanan per Cluster")
+"""
+Grafik ini menunjukkan distribusi penjualan produk berdasarkan bulan untuk setiap cluster
+"""
 colors = ['orange', 'blue', 'red', 'green', 'magenta', 'lime', 'gold', 'sienna', 'navy', 'purple', 'teal', 'cyan', 'tomato', 'yellowgreen', 'khaki', 'crimson', 'chocolate', 'wheat', 'silver']
 bulan_labels = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Juni', 'Juli', 'Ags', 'Sep', 'Okt', 'Nov', 'Des']
 
