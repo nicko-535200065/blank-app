@@ -82,7 +82,10 @@ df2['Bulan'] = df['Bulan']
 # Plot jumlah penjualan per bulan untuk setiap cluster
 st.subheader("Plot Jumlah Penjualan Bulanan per Cluster")
 """
-Grafik ini menunjukkan distribusi penjualan produk berdasarkan bulan untuk setiap cluster
+Grafik ini menunjukkan distribusi penjualan produk berdasarkan bulan untuk setiap cluster.
+"""
+"""
+Setiap batang mewakili total jumlah penjualan di bulan tertentu untuk cluster terkait. Pola naik-turun menggambarkan tren penjualan per bulan.
 """
 colors = ['orange', 'blue', 'red', 'green', 'magenta', 'lime', 'gold', 'sienna', 'navy', 'purple', 'teal', 'cyan', 'tomato', 'yellowgreen', 'khaki', 'crimson', 'chocolate', 'wheat', 'silver']
 bulan_labels = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Juni', 'Juli', 'Ags', 'Sep', 'Okt', 'Nov', 'Des']
@@ -132,6 +135,10 @@ plt.title('Jumlah Total Penjualan')
 
 # Plot jumlah total penjualan untuk semua produk per cluster
 st.subheader("Jumlah Total dan Rata-Rata Penjualan per Cluster")
+"""
+Grafik ini menunjukkan total penjualan untuk semua produk dan rata-rata di setiap cluster.
+
+"""
 #all_sales = df3.groupby('Cluster').sum()
 #all_sales_transpose = all_sales.transpose()
 fig, ax = plt.subplots()
@@ -156,6 +163,15 @@ st.pyplot(fig)
 
 #Menjalankan Plot Silhouette
 st.subheader("Silhouette Score")
+"""
+Silhouette Score mengevaluasi seberapa baik data dikelompokkan dalam cluster.
+"""
+"""
+Nilai mendekati 1 menunjukkan clustering yang baik, 
+"""
+"""
+sedangkan nilai mendekati -1 menunjukkan data salah pengelompokan.
+"""
 fig, ax = plt.subplots()
 visualizer = SilhouetteVisualizer(kmeans, colors='yellowbrick')
 visualizer.fit(df2_norm)
@@ -176,6 +192,18 @@ plt.title('Jumlah Penjualan')
 
 # Plot distribusi penjualan dengan boxplot per cluster
 st.subheader("Distribusi Penjualan per Cluster")
+"""
+Boxplot menunjukkan sebaran data penjualan dalam setiap cluster.
+"""
+"""
+Garis horizontal di dalam kotak adalah median (nilai tengah).
+"""
+"""
+Kotak menggambarkan interquartile range (IQR) atau rentang data antara kuartil 1 dan kuartil 3.
+"""
+"""
+Titik di luar whisker adalah outlier (nilai yang jauh dari data mayoritas).
+"""
 fig, ax = plt.subplots()
 sns.boxplot(data=A, ax=ax)
 ax.set_ylabel("Jumlah")
