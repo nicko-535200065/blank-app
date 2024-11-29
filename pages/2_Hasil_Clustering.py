@@ -83,8 +83,6 @@ df2['Bulan'] = df['Bulan']
 st.subheader("Plot Jumlah Penjualan Bulanan per Cluster")
 """
 Grafik ini menunjukkan distribusi penjualan produk berdasarkan bulan untuk setiap cluster.
-"""
-"""
 Setiap batang mewakili total jumlah penjualan di bulan tertentu untuk cluster terkait. Pola naik-turun menggambarkan tren penjualan per bulan.
 """
 colors = ['orange', 'blue', 'red', 'green', 'magenta', 'lime', 'gold', 'sienna', 'navy', 'purple', 'teal', 'cyan', 'tomato', 'yellowgreen', 'khaki', 'crimson', 'chocolate', 'wheat', 'silver']
@@ -165,11 +163,7 @@ st.pyplot(fig)
 st.subheader("Silhouette Score")
 """
 Silhouette Score mengevaluasi seberapa baik data dikelompokkan dalam cluster.
-"""
-"""
 Nilai mendekati 1 menunjukkan clustering yang baik, 
-"""
-"""
 sedangkan nilai mendekati -1 menunjukkan data salah pengelompokan.
 """
 fig, ax = plt.subplots()
@@ -194,13 +188,8 @@ plt.title('Jumlah Penjualan')
 st.subheader("Distribusi Penjualan per Cluster")
 """
 Boxplot menunjukkan sebaran data penjualan dalam setiap cluster.
-"""
-"""
 Garis horizontal di dalam kotak adalah median (nilai tengah).
-"""
-"""
 Kotak menggambarkan interquartile range (IQR) atau rentang data antara kuartil 1 dan kuartil 3.
-"""
 """
 Titik di luar whisker adalah outlier (nilai yang jauh dari data mayoritas).
 """
