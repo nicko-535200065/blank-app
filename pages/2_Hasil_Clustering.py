@@ -135,7 +135,6 @@ plt.title('Jumlah Total Penjualan')
 st.subheader("Jumlah Total dan Rata-Rata Penjualan per Cluster")
 """
 Grafik ini menunjukkan total penjualan untuk semua produk dan rata-rata di setiap cluster.
-
 """
 #all_sales = df3.groupby('Cluster').sum()
 #all_sales_transpose = all_sales.transpose()
@@ -190,7 +189,6 @@ st.subheader("Distribusi Penjualan per Cluster")
 Boxplot menunjukkan sebaran data penjualan dalam setiap cluster.
 Garis horizontal di dalam kotak adalah median (nilai tengah).
 Kotak menggambarkan interquartile range (IQR) atau rentang data antara kuartil 1 dan kuartil 3.
-"""
 Titik di luar whisker adalah outlier (nilai yang jauh dari data mayoritas).
 """
 fig, ax = plt.subplots()
